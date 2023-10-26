@@ -34,4 +34,4 @@ const ActionTooltip = ({
     );
 };
 
-export default ActionTooltip;
+export { ActionTooltip };

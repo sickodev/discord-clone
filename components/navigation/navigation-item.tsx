@@ -1,9 +1,10 @@
 "use client";
 
-import { cn } from "@/lib/utils";
-import ActionTooltip from "../action-tooltip";
-import { useParams, useRouter } from "next/navigation";
 import Image from "next/image";
+import { useParams, useRouter } from "next/navigation";
+
+import { cn } from "@/lib/utils";
+import { ActionTooltip } from "@/components/action-tooltip";
 
 interface NavigationItemProps {
     id: string;
@@ -11,19 +12,18 @@ interface NavigationItemProps {
     name: string;
 }
 
-const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
+export const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
     const params = useParams();
     const router = useRouter();
 
     const onClick = () => {
         router.push(`/servers/${id}`);
     };
+
     return (
         <ActionTooltip side='right' align='center' label={name}>
             <button
-                onClick={() => {
-                    onClick;
-                }}
+                onClick={onClick}
                 className='group relative flex items-center'
             >
                 <div
@@ -35,7 +35,7 @@ const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
                 />
                 <div
                     className={cn(
-                        "relative group-flex mx-3 h-[48px] w-[48px] rounded-[24px] group-hover:rounded-[16px] transition-all overflow-hidden",
+                        "relative group flex mx-3 h-[48px] w-[48px] rounded-[24px] group-hover:rounded-[16px] transition-all overflow-hidden",
                         params?.serverId === id &&
                             "bg-primary/10 text-primary rounded-[16px]"
                     )}
@@ -46,5 +46,3 @@ const NavigationItem = ({ id, imageUrl, name }: NavigationItemProps) => {
         </ActionTooltip>
     );
 };
-
-export default NavigationItem;
